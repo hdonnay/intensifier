@@ -79,6 +79,7 @@ func main() {
 		FontSz: 20.0,
 	}
 	log.Println("image reaper started")
+	http.HandleFunc("/", index)
 	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir(workDir))))
 	http.Handle("/create", m)
 	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(*listenPort), nil))
@@ -180,5 +181,13 @@ func (m *Memer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 	http.Redirect(w, r, fmt.Sprintf("/img/%s", filename), http.StatusSeeOther)
 	out.Close()
+	return
+}
+
+func index(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, `<html><head></head><body>
+<form enctype="multipart/form-data" method="post" action="/create">
+noun:<input type="text" name="noun"> <input type="file" name="file" accept="image/*" size="40"><br/>
+<input type="submit"></form></body></html>`)
 	return
 }
