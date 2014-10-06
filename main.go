@@ -186,8 +186,11 @@ func (m *Memer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func index(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, `<html><head></head><body>
+<h2>Intensify an Image:</h2>
 <form enctype="multipart/form-data" method="post" action="/create">
 noun:<input type="text" name="noun"> <input type="file" name="file" accept="image/*" size="40"><br/>
-<input type="submit"></form></body></html>`)
+<input type="submit"></form></body>
+<p style="font-size:10px">intensifier -- copyright 2014 hank donnay under AGPLv3 -- source at
+<a href="https://github.com/hdonnay/intensifier">github.com/hdonnay/intensifier</a></p> </html>`)
 	return
 }
