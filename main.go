@@ -20,9 +20,9 @@ import (
 	"strconv"
 	"time"
 
-	"code.google.com/p/freetype-go/freetype"
-	"code.google.com/p/freetype-go/freetype/raster"
-	"code.google.com/p/freetype-go/freetype/truetype"
+	"github.com/golang/freetype"
+	"github.com/golang/freetype/raster"
+	"github.com/golang/freetype/truetype"
 )
 
 var (
@@ -106,7 +106,7 @@ func (m *Memer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	g := gif.GIF{
 		Image:     make([]*image.Paletted, m.Frames),
 		Delay:     make([]int, m.Frames),
-		LoopCount: -1,
+		LoopCount: 0,
 	}
 	if err := r.ParseMultipartForm(1 << 13); err != nil {
 		log.Println(err)
